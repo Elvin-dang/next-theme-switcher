@@ -1,0 +1,164 @@
+:root {
+  --theme-switcher-bg: #f0f0f0;
+  --theme-switcher-primary: #000000;
+  --theme-switcher-tertiary: #a1a1aa;
+  --theme-switcher-border: #ebebeb;
+
+  --theme-switcher-base-size: 1.25rem;
+  --theme-switcher-base-radius: 0.3rem;
+  --theme-switcher-option-width: var(--theme-switcher-base-size);
+  --theme-switcher-option-height: var(--theme-switcher-base-size);
+  --theme-switcher-border-radius: var(--theme-switcher-base-radius);
+
+  --theme-switcher-outer-border-radius: 0.5rem;
+  --theme-switcher-padding: 0.125rem;
+  --theme-switcher-transition: 0.25s ease;
+  --theme-switcher-gap: 0.25rem;
+}
+
+:root.dark {
+  --theme-switcher-bg: #363636;
+  --theme-switcher-primary: #ffffff;
+  --theme-switcher-tertiary: #74747b;
+  --theme-switcher-border: #2e2e2d;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --theme-switcher-bg: #363636;
+    --theme-switcher-primary: #ffffff;
+    --theme-switcher-tertiary: #74747b;
+    --theme-switcher-border: #2e2e2d;
+  }
+}
+
+.theme-switcher {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: fit-content;
+  height: fit-content;
+  border: 1px solid var(--theme-switcher-border);
+  border-radius: var(--theme-switcher-outer-border-radius);
+  padding: var(--theme-switcher-padding);
+}
+
+.theme-switcher[data-tw-size="small"] {
+  --theme-switcher-base-size: 1rem;
+  --theme-switcher-base-radius: 0.35rem;
+  --theme-switcher-option-width: var(--theme-switcher-base-size);
+  --theme-switcher-option-height: var(--theme-switcher-base-size);
+  --theme-switcher-border-radius: var(--theme-switcher-base-radius);
+}
+
+.theme-switcher[data-tw-size="medium"] {
+  --theme-switcher-base-size: 1.25rem;
+  --theme-switcher-base-radius: 0.38rem;
+  --theme-switcher-option-width: var(--theme-switcher-base-size);
+  --theme-switcher-option-height: var(--theme-switcher-base-size);
+  --theme-switcher-border-radius: var(--theme-switcher-base-radius);
+}
+
+.theme-switcher[data-tw-size="large"] {
+  --theme-switcher-base-size: 1.5rem;
+  --theme-switcher-base-radius: 0.41rem;
+  --theme-switcher-option-width: var(--theme-switcher-base-size);
+  --theme-switcher-option-height: var(--theme-switcher-base-size);
+  --theme-switcher-border-radius: var(--theme-switcher-base-radius);
+}
+
+.theme-switcher[data-tw-scale] {
+  --theme-switcher-option-width: calc(
+    var(--theme-switcher-base-size) * attr(data-tw-scale type(<number>), 1)
+  );
+  --theme-switcher-option-height: calc(
+    var(--theme-switcher-base-size) * attr(data-tw-scale type(<number>), 1)
+  );
+  --theme-switcher-border-radius: calc(
+    var(--theme-switcher-base-radius) * attr(data-tw-scale type(<number>), 1)
+  );
+  --theme-switcher-outer-border-radius: calc(
+    var(--theme-switcher-base-radius) * 1.2 * attr(data-tw-scale type(<number>), 1)
+  );
+}
+
+.theme-switcher[data-tw-gap] {
+  --theme-switcher-gap: calc(0.25rem * attr(data-tw-gap type(<number>), 1));
+}
+
+.theme-switcher svg {
+  width: calc(0.7 * var(--theme-switcher-option-width));
+  height: calc(0.7 * var(--theme-switcher-option-height));
+}
+
+.theme-switcher__fieldset {
+  position: relative;
+  display: flex;
+  gap: var(--theme-switcher-gap);
+  justify-content: center;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.theme-switcher__fieldset--bg {
+  background-color: var(--theme-switcher-bg);
+}
+
+.theme-switcher__option {
+  width: var(--theme-switcher-option-width);
+  height: var(--theme-switcher-option-height);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  border-radius: var(--theme-switcher-border-radius);
+  color: var(--theme-switcher-primary);
+}
+
+.theme-switcher__option--active {
+  font-weight: bold;
+}
+
+.theme-switcher__input {
+  display: none;
+}
+
+.theme-switcher__label {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  color: var(--theme-switcher-tertiary);
+}
+
+.theme-switcher__label--primary {
+  color: var(--theme-switcher-primary);
+}
+
+.theme-switcher__label:hover {
+  color: var(--theme-switcher-primary);
+}
+
+.theme-switcher__active-container {
+  position: absolute;
+  overflow: hidden;
+  z-index: 10;
+  width: fit-content;
+  pointer-events: none;
+  transition: clip-path var(--theme-switcher-transition);
+  clip-path: inset(0 100% 0 0 round var(--theme-switcher-border-radius));
+}
+
+.theme-switcher--sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
