@@ -6,22 +6,28 @@ import "./styles.css";
 
 const DEFAULT_LAYOUT = ["light", "dark", "system"];
 
+function cn(...classes: (string | undefined)[]) {
+  return classes.filter(Boolean).join(" ");
+}
+
 const ThemeSwitcher = ({
   theme,
   onThemeChange,
   icons,
   size,
   scale,
+  borderRadius,
   gap,
   layout = DEFAULT_LAYOUT as ThemeSwitcherProps["layout"],
+  className,
 }: ThemeSwitcherProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const indicatorRef = useRef<HTMLDivElement>(null);
   const activeThemeElementRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    const container = containerRef.current;
+    const indicator = indicatorRef.current;
 
-    if (theme && container) {
+    if (theme && indicator) {
       const activeThemeElement = activeThemeElementRef.current;
 
       if (activeThemeElement) {
@@ -29,30 +35,43 @@ const ThemeSwitcher = ({
 
         const clipLeft = offsetLeft;
         const clipRight = offsetLeft + offsetWidth;
-        container.style.clipPath = `inset(0 ${Number(
-          100 - (clipRight / container.offsetWidth) * 100
-        ).toFixed()}% 0 ${Number((clipLeft / container.offsetWidth) * 100).toFixed()}% round var(--theme-switcher-border-radius)`;
+        indicator.style.clipPath = `inset(0 ${Number(
+          100 - (clipRight / indicator.offsetWidth) * 100
+        ).toFixed()}% 0 ${Number((clipLeft / indicator.offsetWidth) * 100).toFixed()}% round var(--theme-switcher-border-radius))`;
+        indicator.getBoundingClientRect();
+        indicator.style.transition = "var(--theme-switcher-transition) !important";
       }
     }
-  }, [theme, activeThemeElementRef, containerRef]);
+  }, [theme, activeThemeElementRef, indicatorRef, gap, borderRadius, scale]);
 
   const THEMES = useMemo(() => getThemes(icons, layout), [icons, layout]);
+
+  const styles = useMemo(() => {
+    return {
+      ...(scale && scale > 0 ? { "--theme-switcher-scale": scale } : {}),
+      ...(gap !== undefined ? { "--theme-switcher-unit-gap": gap } : {}),
+      ...(borderRadius !== undefined
+        ? { "--theme-switcher-base-radius": `${borderRadius}px` }
+        : {}),
+    } as React.CSSProperties;
+  }, [scale, gap, borderRadius]);
 
   const handleThemeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onThemeChange?.(event.target.value);
   };
 
   return (
-    <form className="theme-switcher" data-tw-size={size} data-tw-scale={scale} data-tw-gap={gap}>
-      <fieldset className="theme-switcher__fieldset">
-        <legend className="theme-switcher--sr-only">Select a display theme:</legend>
+    <form
+      data-theme-switcher
+      data-tw-size={size}
+      style={styles}
+      className={cn("theme-switcher", className)}
+    >
+      <fieldset data-wrapper>
+        <legend data-sr-only>Select a display theme:</legend>
 
         {THEMES.map(({ value, label, icon }) => (
-          <span
-            key={value}
-            ref={theme === value ? activeThemeElementRef : null}
-            className="theme-switcher__option"
-          >
+          <span key={value} ref={theme === value ? activeThemeElementRef : null} data-option>
             <input
               aria-label={label}
               type="radio"
@@ -61,26 +80,23 @@ const ThemeSwitcher = ({
               id={value}
               checked={theme === value}
               onChange={handleThemeChange}
-              className="theme-switcher__input"
+              data-input
             />
-            <label htmlFor={value} className="theme-switcher__label">
-              <span className="theme-switcher--sr-only">{label}</span>
+            <label htmlFor={value} data-label="tertiary">
+              <span data-sr-only>{label}</span>
               {icon}
             </label>
           </span>
         ))}
       </fieldset>
 
-      <div aria-hidden className="theme-switcher__active-container" ref={containerRef}>
-        <fieldset className="theme-switcher__fieldset theme-switcher__fieldset--bg">
-          <legend className="theme-switcher--sr-only">Select a display theme:</legend>
+      <div aria-hidden data-indicator ref={indicatorRef}>
+        <fieldset data-wrapper data-background>
+          <legend data-sr-only>Select a display theme:</legend>
           {THEMES.map(({ value, label, icon }) => (
-            <span key={value} className="theme-switcher__option">
-              <label
-                htmlFor={value}
-                className="theme-switcher__label theme-switcher__label--primary"
-              >
-                <span className="theme-switcher--sr-only">{label}</span>
+            <span key={value} data-option>
+              <label htmlFor={value} data-label="primary">
+                <span data-sr-only>{label}</span>
                 {icon}
               </label>
             </span>
@@ -202,3 +218,4 @@ const getThemes = (icons: ThemeSwitcherProps["icons"], layout: ThemeSwitcherProp
 };
 
 export { ThemeSwitcher };
+export type { ThemeSwitcherProps, ThemeOption, SizeOption, GapOption } from "./types";

@@ -12,13 +12,19 @@ export type ThemeOption = "light" | "dark" | "system";
  * - "medium" → Medium icon/buttons
  * - "large"  → Large icon/buttons
  */
-type SizeOption = "small" | "medium" | "large";
+export type SizeOption = "small" | "medium" | "large";
+
+/**
+ * GapOption represents spacing units between theme options.
+ * 1 unit = 0.25rem
+ */
+export type GapOption = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 
 /**
  * ThemeLayout defines the allowed orderings of themes in the ThemeSwitcher.
  * Only the specified permutations of ["light", "dark", "system"] are allowed.
  */
-type ThemeLayout =
+export type ThemeLayout =
   | ["light", "system", "dark"]
   | ["light", "dark", "system"]
   | ["system", "light", "dark"]
@@ -32,13 +38,12 @@ type ThemeLayout =
 export interface ThemeSwitcherProps extends React.PropsWithChildren<unknown> {
   /**
    * Current theme value. Can be "light", "dark", or "system".
-   * If not provided, the component can manage its own state.
    */
   theme?: string;
 
   /**
    * Callback function called when the theme changes.
-   * Receives the new theme value as a string.
+   * Receives the new theme value as a ThemeOption.
    */
   onThemeChange?: (theme: string) => void;
 
@@ -64,13 +69,34 @@ export interface ThemeSwitcherProps extends React.PropsWithChildren<unknown> {
   scale?: number;
 
   /**
-   * Gap (a unit equal to 0.25rem) between theme options.
+   * Border radius of the theme switcher options (in px).
    */
-  gap?: number;
+  borderRadius?: number;
+
+  /**
+   * Gap (a unit equal to 0.25rem) between theme options.
+   * Only integer values from 0 to 10 are allowed.
+   */
+  gap?: GapOption;
 
   /**
    * Optional layout specifying the order of theme options.
    * Must be one of the allowed ThemeLayout permutations.
    */
   layout?: ThemeLayout;
+
+  /**
+   * Optional additional CSS class names for the ThemeSwitcher root element.
+   *
+   * - Accepts any valid Tailwind classes, utility classes, or custom CSS class names.
+   * - Useful when you need to adjust layout, spacing, or override base styles.
+   * - Merges with the component’s internal styles, so your classes take effect
+   *   according to the normal CSS cascade order.
+   *
+   * Example:
+   * ```tsx
+   * <ThemeSwitcher className="mt-4 border border-gray-200" />
+   * ```
+   */
+  className?: string;
 }

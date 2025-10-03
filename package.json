@@ -1,5 +1,4 @@
 {
-  "name": "next-theme-switcher",
   "private": true,
   "scripts": {
     "build": "turbo run build",

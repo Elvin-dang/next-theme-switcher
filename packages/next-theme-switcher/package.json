@@ -1,5 +1,6 @@
 {
-  "name": "@repo/next-theme-switcher",
+  "name": "next-theme-switcher",
+  "description": "A simple and customizable theme switcher component for React.",
   "version": "0.0.1",
   "license": "MIT",
   "main": "./dist/index.js",
@@ -19,12 +20,31 @@
         "default": "./dist/index.js"
       },
       "default": "./dist/index.js"
+    },
+    "./styles": {
+      "default": "./dist/index.css"
     }
   },
   "scripts": {
     "prepublish": "npm run build",
     "build": "tsup",
     "dev": "tsup --watch"
+  },
+  "keywords": [
+    "react",
+    "theme",
+    "themes",
+    "switcher",
+    "nextjs"
+  ],
+  "author": "Elvin Dang <vinhdang871@gmail.com>",
+  "homepage": "https://next-theme-switcher.elvindang.info/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Elvin-dang/next-theme-switcher.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Elvin-dang/next-theme-switcher/issues"
   },
   "peerDependencies": {
     "react": "^16.8 || ^17 || ^18 || ^19",
@@ -34,9 +54,5 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "tsup": "^8.5.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Elvin-dang/next-theme-switcher.git"
   }
 }

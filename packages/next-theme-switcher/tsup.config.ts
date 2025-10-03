@@ -10,5 +10,5 @@ export default defineConfig({
   format: ["esm", "cjs"],
   splitting: false,
   bundle: true,
-  injectStyle: true,
+  injectStyle: false,
 });
