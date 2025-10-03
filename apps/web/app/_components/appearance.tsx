@@ -36,8 +36,6 @@ const Appearance = () => {
       code: `import { useTheme } from "next-themes";
 import { ThemeSwitcher } from "next-theme-switcher";
 
-// ...
-
 function Page() {
   const { theme, setTheme } = useTheme();
 
@@ -95,7 +93,7 @@ function Page() {
       <p className="mb-4 text-sm">
         Customize the appearance of your theme switcher by passing props like{" "}
         <code className="font-bold">size</code>, <code className="font-bold">scale</code>,{" "}
-        <code className="font-bold">border-radius</code>, and <code className="font-bold">gap</code>{" "}
+        <code className="font-bold">borderRadius</code>, and <code className="font-bold">gap</code>{" "}
         to the <code className="font-bold">ThemeSwitcher</code> component.
       </p>
       <div className="flex flex-col gap-3 mb-6">
@@ -112,8 +110,9 @@ function Page() {
               <Button
                 variant={size === "medium" ? "default" : "outline"}
                 onClick={() => setSize("medium")}
+                className="gap-1"
               >
-                medium <p className="opacity-50">(default)</p>
+                medium <span className="opacity-50 text-xs">(default)</span>
               </Button>
               <Button
                 variant={size === "large" ? "default" : "outline"}
@@ -138,47 +137,50 @@ function Page() {
         </div>
         <div className="flex gap-4 justify-between">
           <div>
-            <h1 className="mb-1">Scale</h1>
+            <h1 className="mb-1 ">
+              Scale <span className="text-sm opacity-50">(multiplier)</span>
+            </h1>
             <div className="flex gap-1 items-end justify-start">
-              <p className="text-sm opacity-50">X</p>
               <Input
                 type="number"
                 min={0}
                 value={scale}
-                className="w-18"
+                className="w-full"
                 onChange={(e) => setScale(Number(e.target.value))}
               />
             </div>
           </div>
           <div>
-            <h1 className="mb-1">Border Radius</h1>
+            <h1 className="mb-1">
+              Border Radius <span className="text-sm opacity-50">(px)</span>
+            </h1>
             <div className="flex gap-1 items-end justify-start">
               <Input
                 type="number"
                 min={0}
                 value={borderRadius}
-                className="w-18"
+                className="w-full"
                 onChange={(e) => setBorderRadius(Number(e.target.value))}
               />
-              <p className="text-sm opacity-50">px</p>
             </div>
           </div>
           <div>
-            <h1 className="mb-1">Gap</h1>
+            <h1 className="mb-1">
+              Gap <span className="text-sm opacity-50">(unit)</span>
+            </h1>
             <div className="flex gap-1 items-end justify-start">
               <Input
                 type="number"
                 min={0}
                 value={gap}
-                className="w-16"
+                className="w-full"
                 onChange={(e) => setGap(Number(e.target.value) as GapOption)}
               />
-              <p className="text-sm opacity-50">unit(s)</p>
             </div>
           </div>
         </div>
       </div>
-      <Snippet onValueChange={setActiveTab} value={activeTab} className="h-[500px]">
+      <Snippet onValueChange={setActiveTab} value={activeTab} className="h-[450px]">
         <SnippetHeader>
           <SnippetTabsList>
             {tabs.map((tab) => (

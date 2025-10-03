@@ -7,6 +7,8 @@ const codeLayout = [
     filename: "layout.tsx",
     code: `// next-themes is preinstalled (optional)
 import { ThemeProvider } from 'next-themes'; 
+// add styles
+import "next-theme-switcher/styles"
 
 // ...
 
@@ -36,8 +38,6 @@ const codePage = [
     filename: "page.tsx",
     code: `import { useTheme } from "next-themes";
 import { ThemeSwitcher } from "next-theme-switcher";
-
-// ...
 
 function Page() {
   const { theme, setTheme } = useTheme();

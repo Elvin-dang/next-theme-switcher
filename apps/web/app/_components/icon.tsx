@@ -13,11 +13,12 @@ import {
   SnippetTabsList,
   SnippetTabsTrigger,
 } from "@repo/ui/components/ui/shadcn-io/snippet";
+import { CloudMoon, MonitorCog, Sunrise } from "lucide-react";
 import { ThemeSwitcher } from "next-theme-switcher";
 import { useTheme } from "next-themes";
 import React from "react";
 
-const Custom = () => {
+const Icon = () => {
   const { theme, setTheme } = useTheme();
   const [activeTab, setActiveTab] = React.useState<string>("Preview");
 
@@ -27,17 +28,22 @@ const Custom = () => {
       filename: "page.tsx",
       code: `import { useTheme } from "next-themes";
 import { ThemeSwitcher } from "next-theme-switcher";
+import { CloudMoon, MonitorCog, Sunrise } from "lucide-react";
 
 function Page() {
   const { theme, setTheme } = useTheme();
 
   return (
-    <ThemeSwitcher
-      theme={theme}
-      onThemeChange={setTheme}
-      size="large"
-      className="bg-white/70 dark:bg-gray-900/70 backdrop-blur-md shadow-md rounded-full p-1"
-      borderRadius={12}
+    <ThemeSwitcher 
+      theme={theme} 
+      onThemeChange={setTheme} 
+      icons={
+        {
+          light: Sunrise,
+          dark: CloudMoon,
+          system: MonitorCog,
+        }
+      }
     />
   );
 }`,
@@ -52,9 +58,7 @@ function Page() {
           <ThemeSwitcher
             theme={theme}
             onThemeChange={setTheme}
-            size="large"
-            className="bg-white/70 dark:bg-gray-900/70 backdrop-blur-md shadow-md rounded-full p-1"
-            borderRadius={12}
+            icons={{ light: Sunrise, dark: CloudMoon, system: MonitorCog }}
           />
         </div>
       ),
@@ -78,14 +82,16 @@ function Page() {
   ];
   return (
     <section>
-      <h2 className="text-xl font-semibold mb-2">⭐️ Custom</h2>
+      <h2 className="text-xl font-semibold mb-2">🎨 Icons</h2>
       <p className="mb-4 text-sm">
-        You can override the <code className="font-bold">ThemeSwitcher</code> outer{" "}
-        <code className="font-bold">div</code> by providing a{" "}
-        <code className="font-bold">className</code> prop.
+        Customize the appearance of the <code className="font-bold">ThemeSwitcher</code> by passing
+        your own <code className="font-bold">icons</code> for{" "}
+        <code className="font-bold">light</code>, <code className="font-bold">dark</code>, and{" "}
+        <code className="font-bold">system</code> modes. Each icon should be a React component
+        returning an SVG element.
       </p>
 
-      <Snippet onValueChange={setActiveTab} value={activeTab} className="h-[430px]">
+      <Snippet onValueChange={setActiveTab} value={activeTab} className="h-[530px]">
         <SnippetHeader>
           <SnippetTabsList>
             {tabs.map((tab) => (
@@ -108,4 +114,4 @@ function Page() {
   );
 };
 
-export default Custom;
+export default Icon;

@@ -3,13 +3,15 @@
 import { Lightbulb, MoonIcon, Settings2 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { ThemeSwitcher } from "next-theme-switcher";
-import "next-theme-switcher/styles";
 import Hero from "./_components/hero";
 import Installation from "./_components/installation";
 import Footer from "./_components/footer";
 import { CelestialBackground } from "@/components/celestial-background";
 import Usage from "./_components/usage";
 import Appearance from "./_components/appearance";
+import Layout from "./_components/layout";
+import Icon from "./_components/icon";
+import Custom from "./_components/custom";
 
 export default function Home() {
   const { theme, setTheme } = useTheme();
@@ -22,6 +24,9 @@ export default function Home() {
         <Installation />
         <Usage />
         <Appearance />
+        <Layout />
+        <Icon />
+        <Custom />
       </main>
 
       <Footer />

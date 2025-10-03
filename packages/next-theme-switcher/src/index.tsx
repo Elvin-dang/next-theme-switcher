@@ -218,4 +218,4 @@ const getThemes = (icons: ThemeSwitcherProps["icons"], layout: ThemeSwitcherProp
 };
 
 export { ThemeSwitcher };
-export type { ThemeSwitcherProps, ThemeOption, SizeOption, GapOption } from "./types";
+export type { ThemeSwitcherProps, ThemeOption, ThemeLayout, SizeOption, GapOption } from "./types";

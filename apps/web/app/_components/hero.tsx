@@ -31,13 +31,6 @@ const Hero = (props: Props) => {
       <p className="text-lg text-gray-600 mb-4">
         A simple, customizable Theme Switcher component for React projects.
       </p>
-      {/* <ThemeSwitcher
-        theme={theme}
-        onThemeChange={setTheme}
-        size="large"
-        className="fixed top-4 bg-white/70 dark:bg-gray-900/70 backdrop-blur-md shadow-md rounded-full p-1 z-50"
-        borderRadius={12}
-      /> */}
       <ThemeSwitcher theme={theme} onThemeChange={setTheme} />
       <Link href="/docs">
         <Button className="mt-6 inline-flex cursor-pointer">Document</Button>

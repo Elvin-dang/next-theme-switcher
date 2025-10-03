@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "@repo/ui/globals.css";
 import "nextra-theme-docs/style.css";
+import "next-theme-switcher/styles";
 import { getPageMap } from "nextra/page-map";
 import { Layout, Navbar } from "nextra-theme-docs";
 import Image from "next/image";
