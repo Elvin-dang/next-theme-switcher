@@ -1,7 +1,7 @@
 {
   "name": "next-theme-switcher",
   "description": "A simple and customizable theme switcher component for React.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "license": "MIT",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -20,7 +20,7 @@
     }
   },
   "scripts": {
-    "prepublish": "npm run build",
+    "prepublishOnly": "npm run build",
     "build": "tsup",
     "dev": "tsup --watch"
   },
