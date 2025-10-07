@@ -69,4 +69,8 @@ function Page() {
 }
 ```
 
+---
+
+Find the full API reference in the [documentation](https://next-theme-switcher.elvindang.info).
+
 MIT © Elvin Dang
