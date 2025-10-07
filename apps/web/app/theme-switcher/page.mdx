@@ -1,0 +1,91 @@
+---
+title: ThemeSwitcher
+description: API reference for the ThemeSwitcher component, detailing its props, types, and usage.
+---
+
+import { Tabs, Tab } from "nextra/components";
+
+# ThemeSwitcher
+
+The `ThemeSwitcher` is a flexible and accessible component for allowing users to toggle between light, dark, and system color schemes in your Next.js application.
+
+## Usage
+
+Import the component and use it within your application. You'll typically manage the theme state with a library like `next-themes`.
+
+```tsx
+import { ThemeSwitcher } from "next-theme-switcher";
+import { useTheme } from "next-themes";
+
+export default function MyPage() {
+  const { theme, setTheme } = useTheme();
+
+  return <ThemeSwitcher theme={theme} onThemeChange={setTheme} />;
+}
+```
+
+## Props
+
+The `ThemeSwitcher` component accepts the following props to customize its appearance and functionality.
+
+| Prop                | Type                         | Description                                                                                                                                                                                                            | Default                       |
+| :------------------ | :--------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------- |
+| **`theme`**         | `string`                     | The current theme value. Can be `"light"`, `"dark"`, or `"system"`.                                                                                                                                                    | `undefined`                   |
+| **`onThemeChange`** | `(theme: string) => void`    | A callback function that is invoked when a user selects a new theme. It receives the new theme string (`"light"`, `"dark"`, or `"system"`) as its only argument.                                                       | `undefined`                   |
+| **`icons`**         | `{ light?, dark?, system? }` | An object to provide custom React components for the icons. Each property should be a React component that renders an SVG.                                                                                             | `Internal SVG icons`          |
+| **`size`**          | `SizeOption`                 | Defines the size of the theme switcher buttons and icons.                                                                                                                                                              | `"medium"`                    |
+| **`scale`**         | `number`                     | A numerical multiplier to adjust the size of the icons relative to their container.                                                                                                                                    | `1`                           |
+| **`borderRadius`**  | `number`                     | The border radius in pixels for the individual theme option buttons.                                                                                                                                                   | `6`                           |
+| **`gap`**           | `GapOption`                  | The spacing between theme option buttons.                                                                                                                                                                              | `1`                           |
+| **`layout`**        | `ThemeLayout`                | An array that specifies the exact order of the theme options.                                                                                                                                                          | `["light", "system", "dark"]` |
+| **`className`**     | `string`                     | Optional CSS class names to apply to the root element of the component. This allows for easy customization and integration with utility-first CSS frameworks like Tailwind CSS. For example: `className="mt-4 border"` | `undefined`                   |
+
+## Custom Types
+
+These are the custom type definitions used by the `ThemeSwitcher` component's props.
+
+### ThemeOption
+
+Represents the allowed theme values.
+
+- `"light"` → Light mode
+- `"dark"` → Dark mode
+- `"system"` → Follow the operating system or browser's theme setting
+
+```ts
+export type ThemeOption = "light" | "dark" | "system";
+```
+
+### SizeOption
+
+Represents the preset size variations for the component.
+
+- `"small"` → Renders small icons and buttons.
+- `"medium"` → Renders medium icons and buttons.
+- `"large"` → Renders large icons and buttons.
+
+```ts
+export type SizeOption = "small" | "medium" | "large";
+```
+
+### GapOption
+
+Represents the spacing units between the theme option buttons. The value is an integer from 0 to 10, where **1 unit is equivalent to 0.25rem (4px)**.
+
+```ts
+export type GapOption = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+```
+
+### ThemeLayout
+
+Defines the allowed orderings of themes in the switcher. You must provide one of the following specific array permutations.
+
+```ts
+export type ThemeLayout =
+  | ["light", "system", "dark"]
+  | ["light", "dark", "system"]
+  | ["system", "light", "dark"]
+  | ["system", "dark", "light"]
+  | ["dark", "light", "system"]
+  | ["dark", "system", "light"];
+```

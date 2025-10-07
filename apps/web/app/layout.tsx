@@ -19,7 +19,8 @@ export const metadata: Metadata = {
     default: "Next Theme Switcher",
     template: `%s | Next Theme Switcher`,
   },
-  description: "A simple and customizable theme switcher component for React.",
+  description:
+    "A simple and customizable theme switcher component for React and Next.js applications.",
   applicationName: "Next Theme Switcher",
   appleWebApp: {
     title: "Next Theme Switcher",
@@ -28,7 +29,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Next Theme Switcher",
-    description: "A simple and customizable theme switcher component for React.",
+    description:
+      "A simple and customizable theme switcher component for React and Next.js applications..",
     siteName: "Next Theme Switcher",
     url: "https://next-theme-switcher.elvindang.info/",
     type: "website",
@@ -82,7 +84,7 @@ export default async function RootLayout({
         <Layout
           navbar={navbar}
           pageMap={await getPageMap()}
-          docsRepositoryBase="https://github.com/Elvin-dang/next-theme-switcher/tree/main/apps/web/app/docs"
+          docsRepositoryBase="https://github.com/Elvin-dang/next-theme-switcher/tree/main/apps/web/app"
         >
           {children}
         </Layout>

@@ -1,8 +1,5 @@
 "use client";
 
-import { Lightbulb, MoonIcon, Settings2 } from "lucide-react";
-import { useTheme } from "next-themes";
-import { ThemeSwitcher } from "next-theme-switcher";
 import Hero from "./_components/hero";
 import Installation from "./_components/installation";
 import Footer from "./_components/footer";
@@ -14,8 +11,6 @@ import Icon from "./_components/icon";
 import Custom from "./_components/custom";
 
 export default function Home() {
-  const { theme, setTheme } = useTheme();
-
   return (
     <div className="m-0 p-0 pt-24 px-4 md:px-2 min-h-[calc(100vh-64px)]">
       <CelestialBackground />
@@ -28,7 +23,6 @@ export default function Home() {
         <Icon />
         <Custom />
       </main>
-
       <Footer />
     </div>
   );

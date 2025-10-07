@@ -8,8 +8,6 @@ import {
   SnippetTabsTrigger,
 } from "@repo/ui/components/ui/shadcn-io/snippet";
 
-type Props = {};
-
 const commands = [
   {
     label: "npm",
@@ -29,7 +27,7 @@ const commands = [
   },
 ];
 
-const Installation = (props: Props) => {
+const Installation = () => {
   const [value, setValue] = useState(commands[0]?.label);
   const activeCommand = commands.find((command) => command.label === value);
 

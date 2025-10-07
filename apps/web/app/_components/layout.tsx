@@ -13,14 +13,17 @@ import {
   SnippetTabsList,
   SnippetTabsTrigger,
 } from "@repo/ui/components/ui/shadcn-io/snippet";
-import { ThemeLayout, ThemeSwitcher } from "next-theme-switcher";
+import { ThemeLayout, ThemeOption, ThemeSwitcher } from "next-theme-switcher";
 import { useTheme } from "next-themes";
-import React from "react";
+import React, { useState } from "react";
+import { Button } from "@repo/ui/components/button";
 
 const Layout = () => {
   const { theme, setTheme } = useTheme();
-  const [layout, setLayout] = React.useState<ThemeLayout>(["system", "light", "dark"]);
-  const [activeTab, setActiveTab] = React.useState<string>("Preview");
+  const [layout, setLayout] = useState<ThemeLayout>(["system", "light", "dark"]);
+  const [activeTab, setActiveTab] = useState<string>("Preview");
+  const [draggedItem, setDraggedItem] = useState<ThemeOption | null>(null);
+  const [draggedOverItem, setDraggedOverItem] = useState<ThemeOption | null>(null);
 
   const codePage = [
     {
@@ -69,6 +72,35 @@ function Page() {
       ),
     },
   ];
+
+  const handleDragStart = (e: React.DragEvent<HTMLButtonElement>, item: ThemeOption) => {
+    setDraggedItem(item);
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLButtonElement>, item: ThemeOption) => {
+    e.preventDefault();
+    setDraggedOverItem(item);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    if (!draggedItem || !draggedOverItem || draggedItem === draggedOverItem) {
+      return;
+    }
+
+    const newItems = [...layout];
+    const draggedIndex = layout.findIndex((item) => item === draggedItem);
+    const dropIndex = layout.findIndex((item) => item === draggedOverItem);
+
+    const [removed] = newItems.splice(draggedIndex, 1);
+    if (removed) newItems.splice(dropIndex, 0, removed);
+
+    setLayout(newItems as ThemeLayout);
+    setDraggedItem(null);
+    setDraggedOverItem(null);
+  };
+
   return (
     <section>
       <h2 className="text-xl font-semibold mb-2">🗂️ Layout</h2>
@@ -78,6 +110,23 @@ function Page() {
         <code className="font-bold">light</code>, <code className="font-bold">dark</code>, and{" "}
         <code className="font-bold">system</code> modes are arranged in the switcher.
       </p>
+
+      <div className="flex space-x-2 w-full justify-between p-2 mb-2 bg-foreground/10 rounded-lg border">
+        {layout.map((theme) => (
+          <Button
+            key={theme}
+            variant="outline"
+            size="sm"
+            className="cursor-move flex-1 dark:bg-primary/10"
+            draggable
+            onDragStart={(e) => handleDragStart(e, theme)}
+            onDragOver={(e) => handleDragOver(e, theme)}
+            onDrop={handleDrop}
+          >
+            {theme}
+          </Button>
+        ))}
+      </div>
 
       <Snippet onValueChange={setActiveTab} value={activeTab} className="h-[400px]">
         <SnippetHeader>

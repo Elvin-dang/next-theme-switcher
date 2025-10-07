@@ -1,0 +1,56 @@
+---
+title: "Getting Started"
+description: "A quick guide to installing and using the next-theme-switcher component in your React or Next.js application."
+---
+
+import { Steps } from "nextra/components";
+
+# Getting Started
+
+`next-theme-switcher` is a lightweight, customizable component for toggling between light, dark, and system themes in React and Next.js apps.
+
+<Steps>
+
+### Install
+
+```sh npm2yarn
+npm i next-theme-switcher
+```
+
+### Import and Use
+
+Add the `ThemeSwitcher` component anywhere in your app.
+
+```tsx
+"use client";
+
+import { ThemeSwitcher } from "next-theme-switcher";
+import { useState } from "react";
+import "next-theme-switcher/styles";
+
+export default function Example() {
+  const [theme, setTheme] = useState("system");
+
+  return <ThemeSwitcher theme={theme} onThemeChange={setTheme} />;
+}
+```
+
+**Integrate with "next-themes"**
+
+If your app already uses next-themes, you can easily connect it:
+
+```tsx
+"use client";
+
+import { ThemeSwitcher } from "next-theme-switcher";
+import { useTheme } from "next-themes";
+import "next-theme-switcher/styles";
+
+export default function WithNextThemes() {
+  const { theme, setTheme } = useTheme();
+
+  return <ThemeSwitcher theme={theme} onThemeChange={setTheme} />;
+}
+```
+
+</Steps>

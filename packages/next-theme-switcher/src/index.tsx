@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useId, useMemo, useRef } from "react";
 import { ThemeOption, ThemeSwitcherProps } from "./types";
 import "./styles.css";
 
@@ -23,6 +23,7 @@ const ThemeSwitcher = ({
 }: ThemeSwitcherProps) => {
   const indicatorRef = useRef<HTMLDivElement>(null);
   const activeThemeElementRef = useRef<HTMLSpanElement>(null);
+  const instanceId = useId();
 
   useEffect(() => {
     const indicator = indicatorRef.current;
@@ -42,7 +43,7 @@ const ThemeSwitcher = ({
         indicator.style.transition = "var(--theme-switcher-transition) !important";
       }
     }
-  }, [theme, activeThemeElementRef, indicatorRef, gap, borderRadius, scale]);
+  }, [theme, activeThemeElementRef, indicatorRef, gap, borderRadius, scale, layout]);
 
   const THEMES = useMemo(() => getThemes(icons, layout), [icons, layout]);
 
@@ -57,6 +58,7 @@ const ThemeSwitcher = ({
   }, [scale, gap, borderRadius]);
 
   const handleThemeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(theme);
     onThemeChange?.(event.target.value);
   };
 
@@ -76,13 +78,13 @@ const ThemeSwitcher = ({
               aria-label={label}
               type="radio"
               value={value}
-              name="theme"
-              id={value}
+              name={`${instanceId}-theme`}
+              id={`${instanceId}-${value}`}
               checked={theme === value}
               onChange={handleThemeChange}
               data-input
             />
-            <label htmlFor={value} data-label="tertiary">
+            <label htmlFor={`${instanceId}-${value}`} data-label="tertiary">
               <span data-sr-only>{label}</span>
               {icon}
             </label>

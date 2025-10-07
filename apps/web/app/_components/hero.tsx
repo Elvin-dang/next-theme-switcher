@@ -1,13 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@repo/ui/components/button";
 import Link from "next/link";
 import { Sparkle } from "lucide-react";
-import { ThemeSwitcher } from "next-theme-switcher";
 import { useTheme } from "next-themes";
+import { ThemeSwitcher } from "next-theme-switcher";
 
-type Props = {};
-
-const Hero = (props: Props) => {
+const Hero = () => {
   const { theme, setTheme } = useTheme();
 
   return (
@@ -32,7 +30,7 @@ const Hero = (props: Props) => {
         A simple, customizable Theme Switcher component for React projects.
       </p>
       <ThemeSwitcher theme={theme} onThemeChange={setTheme} />
-      <Link href="/docs">
+      <Link href="/getting-started">
         <Button className="mt-6 inline-flex cursor-pointer">Document</Button>
       </Link>
     </section>
