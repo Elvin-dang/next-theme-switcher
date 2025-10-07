@@ -58,7 +58,6 @@ const ThemeSwitcher = ({
   }, [scale, gap, borderRadius]);
 
   const handleThemeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(theme);
     onThemeChange?.(event.target.value);
   };
 
