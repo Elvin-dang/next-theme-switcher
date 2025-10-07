@@ -84,7 +84,7 @@ export default async function RootLayout({
         <Layout
           navbar={navbar}
           pageMap={await getPageMap()}
-          docsRepositoryBase="https://github.com/Elvin-dang/next-theme-switcher/tree/main/apps/web/app"
+          docsRepositoryBase="https://github.com/Elvin-dang/next-theme-switcher/tree/main/apps/web"
         >
           {children}
         </Layout>
