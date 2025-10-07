@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "@repo/ui/components/button";
 import Link from "next/link";
 import { Sparkle } from "lucide-react";
