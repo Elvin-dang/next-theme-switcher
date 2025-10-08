@@ -10,6 +10,23 @@ function cn(...classes: (string | undefined)[]) {
   return classes.filter(Boolean).join(" ");
 }
 
+function calcClipPath(
+  activeThemeElement: HTMLElement,
+  indicator: HTMLDivElement,
+  theme: string,
+  preThemeRef: React.RefObject<string | undefined>
+) {
+  const { offsetLeft, offsetWidth } = activeThemeElement;
+  const clipLeft = offsetLeft;
+  const clipRight = offsetLeft + offsetWidth;
+  if (theme !== preThemeRef.current) {
+    indicator.attributes.getNamedItem("data-transition")!.value = "true";
+  }
+  indicator.style.clipPath = `inset(0 ${Number(
+    100 - (clipRight / indicator.offsetWidth) * 100
+  ).toFixed()}% 0 ${Number((clipLeft / indicator.offsetWidth) * 100).toFixed()}% round var(--theme-switcher-border-radius))`;
+}
+
 const ThemeSwitcher = ({
   theme,
   onThemeChange,
@@ -33,19 +50,34 @@ const ThemeSwitcher = ({
       const activeThemeElement = activeThemeElementRef.current;
 
       if (activeThemeElement) {
-        const { offsetLeft, offsetWidth } = activeThemeElement;
+        const { offsetWidth } = activeThemeElement;
 
-        const clipLeft = offsetLeft;
-        const clipRight = offsetLeft + offsetWidth;
-        if (theme !== preThemeRef.current) {
-          indicator.attributes.getNamedItem("data-transition")!.value = "true";
+        if (offsetWidth !== 0) {
+          calcClipPath(activeThemeElementRef.current!, indicator, theme, preThemeRef);
+        } else {
+          preThemeRef.current = theme;
         }
-        indicator.style.clipPath = `inset(0 ${Number(
-          100 - (clipRight / indicator.offsetWidth) * 100
-        ).toFixed()}% 0 ${Number((clipLeft / indicator.offsetWidth) * 100).toFixed()}% round var(--theme-switcher-border-radius))`;
       }
     }
   }, [theme, activeThemeElementRef, indicatorRef, gap, borderRadius, scale, layout]);
+
+  useEffect(() => {
+    const indicator = indicatorRef.current;
+    if (!indicator) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry?.isIntersecting) {
+        if (!theme) return;
+        if (!activeThemeElementRef.current) return;
+        calcClipPath(activeThemeElementRef.current, indicator, theme, preThemeRef);
+      } else {
+        indicator.attributes.getNamedItem("data-transition")!.value = "false";
+      }
+    });
+
+    observer.observe(indicator);
+    return () => observer.disconnect();
+  }, [theme]);
 
   const THEMES = useMemo(() => getThemes(icons, layout), [icons, layout]);
 
@@ -98,7 +130,7 @@ const ThemeSwitcher = ({
           <legend data-sr-only>Select a display theme:</legend>
           {THEMES.map(({ value, label, icon }) => (
             <span key={value} data-option>
-              <label htmlFor={value} data-label="primary">
+              <label htmlFor={`${instanceId}-${value}`} data-label="primary">
                 <span data-sr-only>{label}</span>
                 {icon}
               </label>

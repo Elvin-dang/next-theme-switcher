@@ -129,10 +129,6 @@
     @apply bg-background text-foreground;
   }
 
-  mark {
-    color: black !important;
-  }
-
   @keyframes dtn {
     0% {
       transform: translate(128px, 0px);

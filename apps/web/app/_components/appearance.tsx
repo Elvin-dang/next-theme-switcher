@@ -141,6 +141,7 @@ function Page() {
             <div className="flex gap-1 items-end justify-start">
               <Input
                 type="number"
+                name="scale"
                 min={0}
                 value={scale}
                 className="w-full"
@@ -155,6 +156,7 @@ function Page() {
             <div className="flex gap-1 items-end justify-start">
               <Input
                 type="number"
+                name="border-radius"
                 min={0}
                 value={borderRadius}
                 className="w-full"
@@ -169,6 +171,7 @@ function Page() {
             <div className="flex gap-1 items-end justify-start">
               <Input
                 type="number"
+                name="gap"
                 min={0}
                 value={gap}
                 className="w-full"
