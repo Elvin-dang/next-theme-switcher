@@ -1,5 +1,11 @@
 # next-theme-switcher
 
+## 0.0.6
+
+### Patch Changes
+
+- c19ca43: Polish styles
+
 ## 0.0.5
 
 ### Patch Changes
