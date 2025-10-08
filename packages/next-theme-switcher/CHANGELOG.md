@@ -1,5 +1,11 @@
 # next-theme-switcher
 
+## 0.0.7
+
+### Patch Changes
+
+- f6802ef: Display:none case
+
 ## 0.0.6
 
 ### Patch Changes
