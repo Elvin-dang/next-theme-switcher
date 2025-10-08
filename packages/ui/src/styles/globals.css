@@ -129,6 +129,10 @@
     @apply bg-background text-foreground;
   }
 
+  mark {
+    color: black !important;
+  }
+
   @keyframes dtn {
     0% {
       transform: translate(128px, 0px);
@@ -165,5 +169,13 @@
     50% {
       opacity: 0.3;
     }
+  }
+
+  mark {
+    color: black !important;
+  }
+
+  .dark mark {
+    color: white !important;
   }
 }

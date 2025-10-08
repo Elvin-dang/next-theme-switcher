@@ -136,7 +136,6 @@
     width: fit-content;
     pointer-events: none;
     clip-path: inset(0 100% 0 0 round var(--theme-switcher-border-radius));
-    /* transition: var(--theme-switcher-transition) !important; */
   }
 
   [data-theme-switcher] [data-indicator][data-transition="true"] {
