@@ -28,7 +28,7 @@
     --theme-switcher-transition: clip-path 0.25s ease;
   }
 
-  :root.dark {
+  .dark {
     [data-theme-switcher] {
       --theme-switcher-bg: #363636;
       --theme-switcher-primary: #ffffff;
@@ -136,6 +136,11 @@
     width: fit-content;
     pointer-events: none;
     clip-path: inset(0 100% 0 0 round var(--theme-switcher-border-radius));
+    /* transition: var(--theme-switcher-transition) !important; */
+  }
+
+  [data-theme-switcher] [data-indicator][data-transition="true"] {
+    transition: var(--theme-switcher-transition) !important;
   }
 
   [data-theme-switcher] [data-sr-only] {

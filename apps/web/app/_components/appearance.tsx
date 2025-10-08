@@ -135,7 +135,7 @@ function Page() {
         </div>
         <div className="flex gap-4 justify-between">
           <div>
-            <h1 className="mb-1 ">
+            <h1 className="mb-1 flex flex-col sm:block">
               Scale <span className="text-sm opacity-50">(multiplier)</span>
             </h1>
             <div className="flex gap-1 items-end justify-start">
@@ -149,7 +149,7 @@ function Page() {
             </div>
           </div>
           <div>
-            <h1 className="mb-1">
+            <h1 className="mb-1 flex flex-col sm:block">
               Border Radius <span className="text-sm opacity-50">(px)</span>
             </h1>
             <div className="flex gap-1 items-end justify-start">
@@ -163,7 +163,7 @@ function Page() {
             </div>
           </div>
           <div>
-            <h1 className="mb-1">
+            <h1 className="mb-1 flex flex-col sm:block">
               Gap <span className="text-sm opacity-50">(unit)</span>
             </h1>
             <div className="flex gap-1 items-end justify-start">

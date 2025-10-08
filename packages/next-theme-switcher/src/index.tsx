@@ -21,6 +21,7 @@ const ThemeSwitcher = ({
   layout = DEFAULT_LAYOUT as ThemeSwitcherProps["layout"],
   className,
 }: ThemeSwitcherProps) => {
+  const preThemeRef = React.useRef(theme);
   const indicatorRef = useRef<HTMLDivElement>(null);
   const activeThemeElementRef = useRef<HTMLSpanElement>(null);
   const instanceId = useId();
@@ -36,11 +37,12 @@ const ThemeSwitcher = ({
 
         const clipLeft = offsetLeft;
         const clipRight = offsetLeft + offsetWidth;
+        if (theme !== preThemeRef.current) {
+          indicator.attributes.getNamedItem("data-transition")!.value = "true";
+        }
         indicator.style.clipPath = `inset(0 ${Number(
           100 - (clipRight / indicator.offsetWidth) * 100
         ).toFixed()}% 0 ${Number((clipLeft / indicator.offsetWidth) * 100).toFixed()}% round var(--theme-switcher-border-radius))`;
-        indicator.getBoundingClientRect();
-        indicator.style.transition = "var(--theme-switcher-transition) !important";
       }
     }
   }, [theme, activeThemeElementRef, indicatorRef, gap, borderRadius, scale, layout]);
@@ -91,7 +93,7 @@ const ThemeSwitcher = ({
         ))}
       </fieldset>
 
-      <div aria-hidden data-indicator ref={indicatorRef}>
+      <div aria-hidden data-indicator data-transition="false" ref={indicatorRef}>
         <fieldset data-wrapper data-background>
           <legend data-sr-only>Select a display theme:</legend>
           {THEMES.map(({ value, label, icon }) => (

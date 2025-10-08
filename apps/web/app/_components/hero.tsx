@@ -9,8 +9,8 @@ const Hero = () => {
   const { theme, setTheme } = useTheme();
 
   return (
-    <section className="text-center pt-20 flex flex-col items-center">
-      <div className="absolute top-20 right-1/2 translate-x-1/2">
+    <section className="text-center pt-30 flex flex-col items-center">
+      <div className="absolute top-28 right-1/2 translate-x-1/2">
         <div
           className="absolute w-100 h-100 -translate-x-1/3 -translate-y-1/3 dark:hidden"
           style={{
