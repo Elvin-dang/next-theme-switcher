@@ -3,7 +3,7 @@ title: "Getting Started"
 description: "A quick guide to installing and using the next-theme-switcher component in your React or Next.js application."
 ---
 
-import { Steps } from "nextra/components";
+import { Steps, Callout } from "nextra/components";
 
 # Getting Started
 
@@ -34,6 +34,14 @@ export default function Example() {
   return <ThemeSwitcher theme={theme} onThemeChange={setTheme} />;
 }
 ```
+
+<Callout type="info">
+  Make sure to include the component’s stylesheet in app's root layout (`layout.tsx`) or in any file
+  where the component is used. 
+  ```tsx 
+  import "next-theme-switcher/styles"; 
+  ```
+</Callout>
 
 **Integrate with "next-themes"**
 
