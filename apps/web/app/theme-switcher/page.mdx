@@ -16,6 +16,7 @@ Import the component and use it within your application. You'll typically manage
 ```tsx
 import { ThemeSwitcher } from "next-theme-switcher";
 import { useTheme } from "next-themes";
+import "next-theme-switcher/styles";
 
 export default function MyPage() {
   const { theme, setTheme } = useTheme();
