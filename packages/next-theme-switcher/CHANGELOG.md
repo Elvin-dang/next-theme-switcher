@@ -1,5 +1,11 @@
 # next-theme-switcher
 
+## 0.0.8
+
+### Patch Changes
+
+- e5289e6: Pixel Perfect
+
 ## 0.0.7
 
 ### Patch Changes
