@@ -18,7 +18,7 @@ const Hero = () => {
           }}
         />
         <div className="w-32 h-32 bg-white dark:bg-amber-300 rounded-full">
-          <div className="w-32 h-32 bg-black rounded-full [animation:ntd_1s_forwards] dark:[animation:dtn_1s_forwards]"></div>
+          <div className="w-32 h-32 bg-background rounded-full [animation:ntd_1s_forwards] dark:[animation:dtn_1s_forwards]"></div>
         </div>
       </div>
       <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary text-secondary-foreground text-sm font-medium">

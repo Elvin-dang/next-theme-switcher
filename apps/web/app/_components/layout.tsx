@@ -15,7 +15,7 @@ import {
 } from "@repo/ui/components/ui/shadcn-io/snippet";
 import { ThemeLayout, ThemeOption, ThemeSwitcher } from "next-theme-switcher";
 import { useTheme } from "next-themes";
-import React, { useState } from "react";
+import React, { useId, useState } from "react";
 import {
   DndContext,
   closestCenter,
@@ -49,7 +49,6 @@ const SortableTheme = ({ theme }: { theme: ThemeOption }) => {
     <div
       ref={setNodeRef}
       style={style}
-      key={theme}
       className={cn(
         "cursor-grab flex-1 bg-background dark:bg-gray-700 border rounded-md flex items-center justify-center py-1 select-none",
         isCursorGrabbing && "cursor-grabbing"
@@ -66,6 +65,7 @@ const Layout = () => {
   const { theme, setTheme } = useTheme();
   const [layout, setLayout] = useState<ThemeLayout>(["system", "light", "dark"]);
   const [activeTab, setActiveTab] = useState<string>("Preview");
+  const id = useId();
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -144,7 +144,12 @@ function Page() {
         <code className="font-bold">system</code> modes are arranged in the switcher.
       </p>
 
-      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragEnd={handleDragEnd}
+        id={id}
+      >
         <SortableContext items={layout} strategy={horizontalListSortingStrategy}>
           <div className="flex space-x-2 w-full justify-between p-2 mb-2 bg-foreground/10 rounded-lg border touch-none">
             {layout.map((theme) => (
