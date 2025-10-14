@@ -1,3 +1,4 @@
+![demo](https://github.com/user-attachments/assets/3b199922-7faa-4d84-93b2-8c8956be6f6a)
 # next-theme-switcher
 
 A lightweight, customizable, and framework-agnostic **theme switcher** component for **Next.js** and **React**.  
